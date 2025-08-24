@@ -1,6 +1,4 @@
-/* ===========================
-   Base / Layout
-   =========================== */
+/* BASE */
 
 html {
   box-sizing: border-box;
@@ -46,9 +44,25 @@ li {
     line-height: 2em;
 }
 
-/* ===========================
-   Form Shell
-   =========================== */
+.beta-banner {
+  background-color: #fff3cd;
+  color: #614a04;
+  border: 1px solid #ffeeba;
+  padding: 0.6em 1em;
+  font-size: 1.2em;
+  text-align: center;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+}
+
+@media (max-width: 480px) {
+  .beta-banner {
+    font-size: 0.9em;
+    padding: 0.5em 0.8em;
+  }
+}
+
+/* FORM */
 
 form {
   margin-bottom: 1.5rem;
@@ -80,7 +94,6 @@ legend {
   font-size: 1em;
 }
 
-/* Accessible focus styling */
 #epubForm input[type="checkbox"]:focus-visible,
 #epubForm label:focus-visible {
   outline: 2px solid #005a9e;
@@ -88,25 +101,20 @@ legend {
   border-radius: 2px;
 }
 
-/* Semantic disabling appearance (input keeps focusability; JS blocks activation) */
 [aria-disabled="true"] + label {
   opacity: 0.55;
   cursor: not-allowed;
 }
 
-/* ===========================
-   Results / Meta Output
-   =========================== */
+/* VALUES */
 
-/* Make both result areas monospace and preserve newlines from JS .join("\n") */
-#results,
-#metaOutput {
-  font-family: Consolas, Monaco, "Courier New", ui-monospace, SFMono-Regular, monospace;
-  white-space: pre-wrap;
+#results, #metaOutput {
+
 }
 
-/* Token-like chips for sufficient sets */
 .value, .metaTag {
+  font-family: Consolas, Monaco, "Courier New", ui-monospace, SFMono-Regular, monospace;
+  white-space: pre-wrap;
   display: inline-block;
   background: #eef6ff;
   color: #0b3d91;
@@ -118,21 +126,17 @@ legend {
   word-break: break-all;
 }
 
-/* Empty-state helper */
 .empty {
   color: hsl(0, 0%, 40%);
 }
 
-/* Optional styling for inline code/pre if you add any later */
 pre,
 code {
   font-family: Consolas, Monaco, "Courier New", ui-monospace, SFMono-Regular, monospace;
 }
 
 
-/* ===========================
-   Responsive Tweaks
-   =========================== */
+/* RESPONSIVITY */
 
 @media (max-width: 480px) {
   fieldset {
@@ -143,23 +147,6 @@ code {
   }
 }
 
-/* Beta banner styling */
-.beta-banner {
-  background-color: #fff3cd;       /* pale yellow */
-  color: #614a04;                  /* dark gold/brown text */
-  border: 1px solid #ffeeba;
-  padding: 0.6em 1em;
-  font-size: 1.2em;
-  text-align: center;
-  margin-bottom: 1rem;
-  border-radius: 4px;
-}
 
-/* Make it stand out a bit more on small screens */
-@media (max-width: 480px) {
-  .beta-banner {
-    font-size: 0.9em;
-    padding: 0.5em 0.8em;
-  }
-}
+
 
