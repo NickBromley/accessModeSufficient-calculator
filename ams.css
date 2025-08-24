@@ -87,7 +87,7 @@ input[type="checkbox"] {
 }
 
 .note {
-  margin: 0.2em 0.25em 0.2em 1.9em;
+  margin: 0.2em 0.25em 0.2em 2em;
   color: #494747;
   font-size: 1em;
   font-style: italic;
@@ -259,4 +259,5 @@ code {
     padding-left: 2em;
   }
 }
+
 
