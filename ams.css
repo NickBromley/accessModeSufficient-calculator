@@ -1,0 +1,165 @@
+/* ===========================
+   Base / Layout
+   =========================== */
+
+html {
+  box-sizing: border-box;
+  font-size: 1.05em;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  color: #141414;
+  line-height: 1.5;
+  max-width: 80%;
+  margin: 1em auto;
+  padding: 0 1rem;
+  background: #fff;
+}
+
+h1 {
+  line-height: 1.25;
+  margin: 0.2em 0 0.6em;
+}
+
+h2 {
+  line-height: 1.25;
+  margin: 2em 0em 1em 0em;
+  padding: 0.2em 0.2em 0.2em 0.4em;
+  background-color: #badae2;
+}
+
+h1 > code, h2 > code {
+    word-break: break-all;
+}
+
+h3 {
+  line-height: 1.25;
+  margin: 1.2em 0 0.6em;
+}
+
+li {
+    line-height: 2em;
+}
+
+/* ===========================
+   Form Shell
+   =========================== */
+
+form {
+  margin-bottom: 1.5rem;
+}
+
+fieldset {
+  margin-bottom: 1em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0.6em 1em 0.9em;
+}
+
+legend {
+  font-weight: 700;
+  padding: 0 0.3em;
+}
+
+#epubForm label {
+  font-weight: 400;
+}
+
+.option {
+  padding: 0.3em;
+}
+
+.note {
+  margin: 0.2em 0.25em 0.2em 1.5em;
+  color:#494747;
+  font-size: 1em;
+}
+
+/* Accessible focus styling */
+#epubForm input[type="checkbox"]:focus-visible,
+#epubForm label:focus-visible {
+  outline: 2px solid #005a9e;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Semantic disabling appearance (input keeps focusability; JS blocks activation) */
+[aria-disabled="true"] + label {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* ===========================
+   Results / Meta Output
+   =========================== */
+
+/* Make both result areas monospace and preserve newlines from JS .join("\n") */
+#results,
+#metaOutput {
+  font-family: Consolas, Monaco, "Courier New", ui-monospace, SFMono-Regular, monospace;
+  white-space: pre-wrap;
+}
+
+/* Token-like chips for sufficient sets */
+.value, .metaTag {
+  display: inline-block;
+  background: #eef6ff;
+  color: #0b3d91;
+  padding: 0.2em 0.45em;
+  margin: 0.2em 0.25em 0.2em 0;
+  border: 1px solid #cfe3ff;
+  border-radius: 4px;
+  line-height: 1.3;
+  word-break: break-all;
+}
+
+/* Empty-state helper */
+.empty {
+  color: hsl(0, 0%, 40%);
+}
+
+/* Optional styling for inline code/pre if you add any later */
+pre,
+code {
+  font-family: Consolas, Monaco, "Courier New", ui-monospace, SFMono-Regular, monospace;
+}
+
+
+/* ===========================
+   Responsive Tweaks
+   =========================== */
+
+@media (max-width: 480px) {
+  fieldset {
+    padding: 0.5em 0.8em 0.8em;
+  }
+  #epubForm fieldset {
+    gap: 0.35em 0.5em;
+  }
+}
+
+/* Beta banner styling */
+.beta-banner {
+  background-color: #fff3cd;       /* pale yellow */
+  color: #614a04;                  /* dark gold/brown text */
+  border: 1px solid #ffeeba;
+  padding: 0.6em 1em;
+  font-size: 1.2em;
+  text-align: center;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+}
+
+/* Make it stand out a bit more on small screens */
+@media (max-width: 480px) {
+  .beta-banner {
+    font-size: 0.9em;
+    padding: 0.5em 0.8em;
+  }
+}
+

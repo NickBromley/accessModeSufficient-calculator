@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>EPUB accessModeSufficient Metadata Calculator</title>
+<link rel="stylesheet" href="ams.css">
+</head>
+<body>
+  <main>
+  <div class="beta-banner">
+    <strong>BETA RELEASE:</strong> This tool is for testing purposes only.
+  </div>
+
+  <h1>EPUB <code>accessModeSufficient</code> Metadata Calculator</h1>
+
+  <form id="epubForm">
+    <div>
+      <p>A simple tool to calculate required values for the <code>accessModeSufficient</code> metadata property for epubs, depending on the type of content.</p>
+      <p>Select the types of content in your epub using the checkboxes below. Then select what text/media alternatives, if any, are included.</p>
+      <p>The required <code>accessModeSufficient</code> values will appear underneath.</p>
+    </div>
+
+    <h2>Epub content</h2>
+
+    <fieldset>
+      <legend>Content Format Types</legend>
+      <div class="option">
+        <input type="checkbox" id="content-text" name="content" value="T">
+        <label for="content-text">Text</label>
+      </div>
+
+      <div class="option">
+        <input type="checkbox" id="content-images" name="content" value="I">
+        <label for="content-images">Images</label>
+        <p class="note">Assumes images convey meaningful information not already conveyed elsewhere in the epub as text.</p>
+      </div>
+
+      <div class="option"> 
+        <input type="checkbox" id="content-audio" name="content" value="A">
+        <label for="content-audio">Audio</label>
+        <p class="note">Assumes audio conveys meaningful information not already conveyed elsewhere in the epub as text.</p>
+      </div>
+
+      <div class="option">
+        <input type="checkbox" id="content-video" name="content" value="V">
+        <label for="content-video">Video</label>
+        <p class="note">Assumes default audio track conveys meaningful information not already conveyed elsewhere in the epub as text <strong>AND</strong> visuals convey meaningful information not already described in the default audio track.</p>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Text/Media Alternatives</legend>
+      <div class="option">
+        <input type="checkbox" id="alt-altText" name="alt" value="altText">
+        <label for="alt-altText">Alt text for images</label>
+        
+      </div>
+      <div class="option">
+        <input type="checkbox" id="alt-audioTranscript" name="alt" value="audioTranscript">
+        <label for="alt-audioTranscript">Audio transcript for audio/video</label>
+        
+      </div>
+      <div class="option">
+        <input type="checkbox" id="alt-captions" name="alt" value="captions">
+        <label for="alt-captions">Captions for video</label>
+        
+      </div> 
+      <div class="option">
+        <input type="checkbox" id="alt-descTranscript" name="alt" value="descTranscript">
+        <label for="alt-descTranscript">Descriptive transcript for video</label>
+        <p class="note">A descriptive transcript describes all information conveyed aurally <strong>AND</strong> visually.</p>
+      </div>
+
+      <div class="option">
+        <input type="checkbox" id="alt-audioDescription" name="alt" value="audioDescription">
+        <label for="alt-audioDescription">Audio description for video</label>
+        
+      </div>
+    </fieldset>
+  </form>
+
+  <section>
+    <h2><code>accessModeSufficient</code> values</h2>
+  <section>
+    <h3>Values only</h2>
+    <div id="results"></div>
+  </section>
+
+  <section>
+    <h3>Full <code>&lt;meta&gt;</code> elements</h2>
+    <div id="metaOutput"></div>
+  </section>
+  </section>
+  <section>
+    <h2>Resources</h2>
+    <ul>
+      <li><a href="https://kb.daisy.org/publishing/docs/metadata/schema.org/accessModeSufficient.html">The DAISY Consortium: <code>accessModeSufficient</code></a>
+      </li>
+      <li><a href="https://schema.org/accessModeSufficient">Schema.org: <code>accessModeSufficient</code></a>
+      </li>
+      <li><a href="https://www.w3.org/TR/epub-a11y-11/#sec-disc-package">EPUB Accessibility 1.1: Package metadata</a></li>
+      <li>Understanding relevant WCAG success criteria:
+        <ul>
+          <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/non-text-content.html">1.1.1 Non-text Content (A)</a></li>
+          <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/audio-only-and-video-only-prerecorded.html">1.2.1 Audio-only and Video-only (Prerecorded) (A)</a></li>
+          <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/captions-prerecorded">1.2.2 Captions (Prerecorded) (A)</a></li>
+          <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/audio-description-or-media-alternative-prerecorded">1.2.3 Audio Description or Media Alternative (Prerecorded) (A)</a></li>
+          <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/audio-description-prerecorded">1.2.5 Audio Description (Prerecorded) (AA)</a></li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+</main>
+
+<script src="ams.js"></script>
+</body>
+</html>
