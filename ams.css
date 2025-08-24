@@ -180,22 +180,29 @@ code {
 #epubForm input[type="checkbox"] {
   position: absolute;
   opacity: 0;
-  pointer-events: none;
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 #epubForm input[type="checkbox"] + label {
   position: relative;
-  padding-left: 1.8em;
-  cursor: pointer;
+  padding-left: 2em;
+  min-height: 24px;
+  display: inline-flex;
+  align-items: center;
 }
+
 
 #epubForm input[type="checkbox"] + label::before {
   content: "";
   position: absolute;
   left: 0;
   top: 0.15em;
-  width: 1.2em;
-  height: 1.2em;
+  width: 1.5em;
+  height: 1.5em;
   border: 2px solid #17480D;
   border-radius: 4px;
   background: white;
@@ -210,8 +217,8 @@ code {
 #epubForm input[type="checkbox"]:checked + label::after {
   content: "";
   position: absolute;
-  left: 0.43em;
-  top: 0.33em;
+  left: 0.6em;
+  top: 0.46em;
   width: 0.35em;
   height: 0.7em;
   border: solid #17480D;
@@ -228,31 +235,26 @@ code {
 /* RESPONSIVITY */
 
 @media (max-width: 768px) {
-  /* Let the page breathe full-width on small screens */
   body {
     max-width: 100%;
     margin: 0;
     padding: 0.75rem;
   }
 
-  /* Fieldsets: slightly tighter padding for small screens */
   fieldset {
     padding: 0.5em 0.8em 0.8em;
   }
 
-  /* If your fieldsets have grid/flex gaps, reduce them */
   #epubForm fieldset {
     gap: 0.35em 0.5em;
   }
 
-  /* Make form controls finger-friendly and full-width */
   input, select, textarea, button {
     font-size: 1rem;
     width: 100%;
     box-sizing: border-box;
   }
 
-  /* Ensure custom checkboxes align nicely on narrow screens */
   #epubForm input[type="checkbox"] + label {
     padding-left: 1.6em;
   }
