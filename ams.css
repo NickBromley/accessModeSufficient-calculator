@@ -45,8 +45,6 @@ li {
     line-height: 2em;
 }
 
-
-
 .beta-banner {
   background-color: #F69B70;
   color: #56260F;
@@ -56,12 +54,21 @@ li {
   margin-bottom: 1rem;
 }
 
-@media (max-width: 480px) {
-  .beta-banner {
-    font-size: 0.9em;
-    padding: 0.5em 0.8em;
+/* Default desktop/tablet styles */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* Mobile override */
+@media (max-width: 768px) {
+  .container {
+    max-width: 100%;
+    padding: 0.75rem;
   }
 }
+
 
 /* CONTENT TYPE FORM */
 
@@ -236,7 +243,7 @@ code {
 
 /* RESPONSIVITY */
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   fieldset {
     padding: 0.5em 0.8em 0.8em;
   }
@@ -244,3 +251,4 @@ code {
     gap: 0.35em 0.5em;
   }
 }
+
