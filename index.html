@@ -7,16 +7,17 @@
 </head>
 <body>
   <main>
+  
+  <h1>EPUB <code>accessModeSufficient</code> Metadata Calculator</h1>
+
   <div class="beta-banner">
     <strong>BETA RELEASE:</strong> This tool is for testing purposes only and may contain errors.
   </div>
 
-  <h1>EPUB <code>accessModeSufficient</code> Metadata Calculator</h1>
-
   <form id="epubForm">
     <div>
       <p>A simple tool to calculate <code>accessModeSufficient</code> metadata values for an epub, depending on the type of content it contains.</p>
-      <p>Select the types of content in your epub using the checkboxes below. Then select what text/media alternatives, if any, are included.</p>
+      <p>Select the types of content in your epub using the following checkboxes. Then select what text/media alternatives, if any, are included.</p>
       <p>The required combinations of <code>accessModeSufficient</code> values to include in the epub package metadata will be listed underneath.</p>
     </div>
 
@@ -27,6 +28,7 @@
       <div class="option">
         <input type="checkbox" id="content-text" name="content" value="T">
         <label for="content-text">Text</label>
+        <p class="note">Assumes all meanginful text is encoded text and not an image.</p>
       </div>
 
       <div class="option">
@@ -50,6 +52,7 @@
 
     <fieldset>
       <legend>Text/Media Alternatives</legend>
+      <p class="intro">Checkboxes are disabled until relevant content formats are selected above.</p>
       <div class="option">
         <input type="checkbox" id="alt-altText" name="alt" value="altText">
         <label for="alt-altText">Alt text for images</label>
@@ -70,8 +73,8 @@
       <div class="option">
         <input type="checkbox" id="alt-descTranscript" name="alt" value="descTranscript">
         <label for="alt-descTranscript">Descriptive transcript for video</label>
-        <p class="note">Assumes transcript is available to read alongside the audio/video and is accessible with a screen reader.</p>
         <p class="note">A descriptive transcript describes all information conveyed aurally <strong>AND</strong> visually.</p>
+        <p class="note">Assumes transcript is available to read alongside the audio/video and is accessible with a screen reader.</p>
       </div>
 
       <div class="option">
@@ -85,13 +88,22 @@
   <section>
     <h2><code>accessModeSufficient</code> values</h2>
   <section>
-    <h3>Values only</h2>
+    <h3 id="valuesOnly">Values only</h2>
     <div id="results"></div>
+    <div id="copyResultsBtnContainer">
+      <button id="copyResultsBtn" class="copy-btn hidden" aria-describedby="valuesOnly">Copy values</button>
+      <span id="copyResultsFeedback" class="copy-feedback visually-hidden" aria-live="polite"></span>
+    </div>
   </section>
 
   <section>
-    <h3>Full <code>&lt;meta&gt;</code> elements</h2>
+    <h3 id="fullMeta">Full <code>&lt;meta&gt;</code> elements</h2>
     <div id="metaOutput"></div>
+    <div id="copyMetaBtnContainer">
+  <button id="copyMetaBtn" class="copy-btn hidden" aria-describedby="fullMeta">Copy values</button>
+  <span id="copyMetaFeedback" class="copy-feedback visually-hidden" aria-live="polite"></span>
+</div>
+
   </section>
   </section>
   <section>
@@ -100,7 +112,7 @@
       <li><a href="https://kb.daisy.org/publishing/docs/metadata/schema.org/accessModeSufficient.html">The DAISY Consortium: <code>accessModeSufficient</code></a></li>
       <li><a href="https://www.w3.org/TR/epub-a11y-11/#sec-disc-package">EPUB Accessibility 1.1: Package metadata</a></li>
       <li><a href="https://www.w3.org/TR/epub-a11y-tech-11/#accessModeSufficient">EPUB Accessibility Techniques 1.1: Identify sufficient access modes</a></li>
-      <li>Understanding relevant WCAG success criteria:
+      <li>Related WCAG success criteria:
         <ul>
           <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/non-text-content.html">1.1.1 Non-text Content (A)</a></li>
           <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/audio-only-and-video-only-prerecorded.html">1.2.1 Audio-only and Video-only (Prerecorded) (A)</a></li>
