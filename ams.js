@@ -1,3 +1,12 @@
+document.getElementById('copyResultsBtn').addEventListener('click', () => {
+  copyToClipboard(resultsDiv.innerText, document.getElementById('copyResultsFeedback'));
+});
+
+document.getElementById('copyMetaBtn').addEventListener('click', () => {
+  copyToClipboard(metaDiv.innerText, document.getElementById('copyMetaFeedback'));
+});
+
+
 // State helpers
 function getState() {
   const c = new Set(
@@ -22,7 +31,6 @@ function updateAltCheckboxStates() {
   toggleCtrl('alt-audioDescription',  hasVideo);
 }
 
-// Accessible disabling pattern for Pattern B (input + label siblings)
 // Uses aria-disabled for semantics, keeps focusable, blocks interaction via JS.
 function toggleCtrl(id, enabled) {
   const cb = document.getElementById(id);
@@ -171,9 +179,14 @@ function evaluateSets() {
 function render() {
   const selections = getState();
 
+  const copyResultsBtn = document.getElementById('copyResultsBtn');
+  const copyMetaBtn = document.getElementById('copyMetaBtn');
+
   if (selections.c.size === 0) {
-    resultsDiv.innerHTML = '<span class="empty">Select at least one content type.</span>';
-    metaDiv.innerHTML    = '<span class="empty">Select at least one content type.</span>';
+    resultsDiv.innerHTML = '<span class="empty">Select at least one content format type.</span>';
+    metaDiv.innerHTML    = '<span class="empty">Select at least one content format type.</span>';
+    copyResultsBtn.classList.add('hidden');
+    copyMetaBtn.classList.add('hidden');
     return;
   }
 
@@ -182,6 +195,8 @@ function render() {
   if (sets.length === 0) {
     resultsDiv.innerHTML = '<span class="empty">No sufficient combinations found.</span>';
     metaDiv.innerHTML    = '<span class="empty">No sufficient combinations found.</span>';
+    copyResultsBtn.classList.add('hidden');
+    copyMetaBtn.classList.add('hidden');
     return;
   }
 
@@ -189,11 +204,30 @@ function render() {
     .map(arr => `<span class="value">[${arr.map(s => `"${s}"`).join(', ')}]</span>`)
     .join('\n');
 
-  // Output EPUB-ready meta tags (string form for copy-paste)
   metaDiv.innerHTML = sets
     .map(arr => `<span class="metaTag">&lt;meta property="schema:accessModeSufficient"&gt;${arr.join(', ')}&lt;/meta&gt;</span>`)
     .join('\n');
+
+  copyResultsBtn.classList.remove('hidden');
+  copyMetaBtn.classList.remove('hidden');
 }
+
+function copyToClipboard(text, feedbackEl) {
+  navigator.clipboard.writeText(text).then(() => {
+    feedbackEl.classList.remove('visually-hidden');
+    feedbackEl.textContent = 'Copied!';
+    // Leave it long enough for AT to announce
+    setTimeout(() => {
+      feedbackEl.textContent = '';
+      feedbackEl.classList.add('visually-hidden');
+    }, 2000);
+  }).catch(err => {
+    feedbackEl.classList.remove('visually-hidden');
+    feedbackEl.textContent = 'Copy failed';
+    console.error('Failed to copy:', err);
+  });
+}
+
 
 // Wiring
 const resultsDiv = document.getElementById('results');
