@@ -228,6 +228,17 @@ function copyToClipboard(text, feedbackEl) {
   });
 }
 
+// Run once on initial load
+document.addEventListener('DOMContentLoaded', () => {
+  updateAltCheckboxStates();
+  render();
+});
+
+// Run again whenever the page is restored from bfcache or back navigation
+window.addEventListener('pageshow', () => {
+  updateAltCheckboxStates();
+  render();
+});
 
 // Wiring
 const resultsDiv = document.getElementById('results');
@@ -244,3 +255,4 @@ document.querySelectorAll('#epubForm input[type="checkbox"]').forEach(cb => {
 // Initial paint
 updateAltCheckboxStates();
 render();
+
