@@ -82,35 +82,30 @@ function evaluateSets() {
   const hasA = c.has('A');
   const hasV = c.has('V');
 
-  const altText         = alts.has('altText');
-  const transcript      = alts.has('audioTranscript');
-  const captions        = alts.has('captions');
-  const descTranscript  = alts.has('descTranscript');
-  const audioDescription= alts.has('audioDescription');
+  const altText          = alts.has('altText');
+  const transcript       = alts.has('audioTranscript');
+  const captions         = alts.has('captions');
+  const descTranscript   = alts.has('descTranscript');
+  const audioDescription = alts.has('audioDescription');
 
   function coversAll(candidate) {
     const hasTextual  = candidate.has('textual');
     const hasVisual   = candidate.has('visual');
     const hasAuditory = candidate.has('auditory');
 
-    // Text content requires textual access
     if (hasT && !hasTextual) return false;
 
-    // Images: visual, or alt text as textual
     if (hasI) {
       const imagesCovered = hasVisual || (altText && hasTextual);
       if (!imagesCovered) return false;
     }
 
-    // Audio: auditory, or transcript as textual
     if (hasA) {
       const audioCovered = hasAuditory || (transcript && hasTextual);
       if (!audioCovered) return false;
     }
 
-    // Video: must cover both audio and visual components
     if (hasV) {
-      // Cover video's audio track
       const videoAudioCovered =
         hasAuditory ||
         (captions && hasVisual) ||
@@ -118,7 +113,6 @@ function evaluateSets() {
         (descTranscript && hasTextual);
       if (!videoAudioCovered) return false;
 
-      // Cover video's visual track
       const videoVisualCovered =
         hasVisual ||
         (descTranscript && hasTextual) ||
@@ -133,15 +127,14 @@ function evaluateSets() {
     ['textual'],
     ['visual'],
     ['auditory'],
-    ['textual','visual'],
-    ['textual','auditory'],
-    ['visual','auditory'],
-    ['textual','visual','auditory']
+    ['textual', 'visual'],
+    ['textual', 'auditory'],
+    ['visual', 'auditory'],
+    ['textual', 'visual', 'auditory']
   ].map(arr => new Set(arr));
 
   const covered = allCandidates.filter(coversAll);
 
-  // Keep minimal sets, then include logical expansions that still satisfy coverage
   function isProperSubset(a, b) {
     if (a.size >= b.size) return false;
     for (const x of a) if (!b.has(x)) return false;
@@ -154,10 +147,8 @@ function evaluateSets() {
 
   const expansions = new Set();
   minimal.forEach(set => {
-    // Always include the minimal set itself
     expansions.add(JSON.stringify(sortSetArray(set)));
 
-    // Offer expanded sets that remain sufficient, in stable order
     if ((hasI || hasV) && !set.has('visual')) {
       const s = new Set(set); s.add('visual');
       if (coversAll(s)) expansions.add(JSON.stringify(sortSetArray(s)));
@@ -172,7 +163,19 @@ function evaluateSets() {
     }
   });
 
-  return [...expansions].map(s => JSON.parse(s));
+  // ✅ Sort so single-value sets come first, then multi-value sets
+  return [...expansions]
+    .map(s => JSON.parse(s))
+    .sort((a, b) => {
+      if (a.length !== b.length) {
+        return a.length - b.length; // shorter first
+      }
+      for (let i = 0; i < a.length; i++) {
+        const diff = ORDER.indexOf(a[i]) - ORDER.indexOf(b[i]);
+        if (diff !== 0) return diff;
+      }
+      return 0;
+    });
 }
 
 // Rendering
@@ -255,4 +258,3 @@ document.querySelectorAll('#epubForm input[type="checkbox"]').forEach(cb => {
 // Initial paint
 updateAltCheckboxStates();
 render();
-
