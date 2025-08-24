@@ -2,7 +2,7 @@
 
 html {
   box-sizing: border-box;
-  font-size: 1.05em;
+  font-size: 1.1em;
 }
 
 *, *::before, *::after {
@@ -94,8 +94,7 @@ legend {
   font-size: 1em;
 }
 
-#epubForm input[type="checkbox"]:focus-visible,
-#epubForm label:focus-visible {
+#epubForm input[type="checkbox"]:focus-visible, #epubForm label:focus-visible {
   outline: 2px solid #005a9e;
   outline-offset: 2px;
   border-radius: 2px;
@@ -109,12 +108,11 @@ legend {
 /* VALUES */
 
 #results, #metaOutput {
-
+  white-space: pre-wrap;
 }
 
 .value, .metaTag {
   font-family: Consolas, Monaco, "Courier New", ui-monospace, SFMono-Regular, monospace;
-  white-space: pre-wrap;
   display: inline-block;
   background: #eef6ff;
   color: #0b3d91;
@@ -130,8 +128,7 @@ legend {
   color: hsl(0, 0%, 40%);
 }
 
-pre,
-code {
+pre, code {
   font-family: Consolas, Monaco, "Courier New", ui-monospace, SFMono-Regular, monospace;
 }
 
@@ -146,7 +143,3 @@ code {
     gap: 0.35em 0.5em;
   }
 }
-
-
-
-
