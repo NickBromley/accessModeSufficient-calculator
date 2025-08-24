@@ -163,7 +163,7 @@ function evaluateSets() {
     }
   });
 
-  // ✅ Sort so single-value sets come first, then multi-value sets
+  // Sort so single-value sets come first, then multi-value sets
   return [...expansions]
     .map(s => JSON.parse(s))
     .sort((a, b) => {
@@ -258,3 +258,4 @@ document.querySelectorAll('#epubForm input[type="checkbox"]').forEach(cb => {
 // Initial paint
 updateAltCheckboxStates();
 render();
+
